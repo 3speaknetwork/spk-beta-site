@@ -1,5 +1,4 @@
 import './App.css';
-import { SpkClient } from 'spk-graph-client/dist/spk-client'
 import { CeramicClient } from '@ceramicnetwork/http-client'
 import { Ed25519Provider } from 'key-did-provider-ed25519'
 import KeyResolver from 'key-did-resolver'

@@ -1,5 +1,5 @@
 import { useContext, createContext, useEffect, useState, useCallback } from 'react'
-import { SpkClient } from 'spk-graph-client/dist/spk-client'
+import { SpkClient } from 'spk-graph-client'
 import {CeramicInstance} from './Ceramic'
 
 
