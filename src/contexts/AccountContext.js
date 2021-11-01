@@ -33,11 +33,16 @@ class AccountContextClass {
         const auth = this.getAuth()
 
         if(!auth) {
+            console.log('LOPGIN FAILED!')
             return;
         } 
         auth.authSecret = Object.values(auth.authSecret)
-        console.log(auth)
-        await this.createIdentity(auth)
+
+        const didInfo = await this.createIdentity(auth)
+        
+        this.hiveName = auth.authId
+
+        return didInfo
     }
     async createIdentity({authId, authSecret}) {
         const provider = new Ed25519Provider(authSecret)
@@ -71,6 +76,7 @@ class AccountContextClass {
         const did = await this.createIdentity({authId, authSecret})
         // log the DID 
         this.storeAuth({authId, authSecret})
+        this.hiveName = authId
 
         const accountInfo = (await DHive.database.getAccounts([
             username
@@ -100,14 +106,20 @@ const { useGlobalState } = createGlobalState(initialState);
 
 
 export const AccountSystem = () => {
+    const {Ceramic} = useCeramic()
     const ac = useContext(AccountContext)
     const [, setMyDid] = useGlobalState('did');
 
     useEffect(async () => {
+        console.log('attempting to login!')
         //Trigger login
         await ac.checkLogin()
-        setMyDid(ac.did)
-    }, [])
+        console.log(ac)
+        if(ac.did) {
+            Ceramic.setDID(ac.did)
+            setMyDid(ac.did)
+        }
+    }, [Ceramic])
     return (null)
 };
 
@@ -122,10 +134,6 @@ export const useAccountContext = function() {
             await Ceramic.setDID(ac.did);
         }
         setMyDid(ac.did)
-        const ts = await ClientInstance.client.createDocument({
-            text: 'hello world!'
-          })
-          console.log(ts)
     }, [ac, setMyDid])
     
 

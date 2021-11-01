@@ -17,19 +17,26 @@ import {
   Link
 } from "react-router-dom";
 import { userPage } from './pages/UserPage';
+import { CreatePost } from './pages/CreatePost';
+import { UserPosts } from './pages/UserPosts';
 
+import Button from '@mui/material/Button'
+import Divider from '@mui/material/Divider'
 
+import 'react-notifications/lib/notifications.css';
 
+import {NotificationContainer} from 'react-notifications';
 
 function App() {
   const {
     triggerLoginWithHive
   } = useAccountContext()
   const ac = useContext(AccountContext)
-  console.log(ac)
+
 
   const did = ResolveUsername('vaultec')
   console.log(did)
+
 
 
 
@@ -37,16 +44,42 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        <button onClick={triggerLoginWithHive}>
-          Login with hive keyChain!
-        </button>
+
         <HashRouter>
+          <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '80%', maxWidth: '300px' }}>
+
+
+            {
+              ac.hiveName ?
+                <>
+                  <Link to="/create">
+                    <Button variant="contained">
+                      Create
+                    </Button>
+                  </Link>
+                  <Link to={`/@${ac.hiveName.split(':')[1]}/posts`}>
+                    <Button variant="contained">
+                      Your Posts
+                    </Button>
+                  </Link></> : <div><Button variant="contained" onClick={triggerLoginWithHive}>
+                    Click to login (hive keychain)
+                  </Button></div>
+            }
+          </div>
+          <Divider />
+          <Switch>
+            <Route exact path="/@:id/posts" component={UserPosts} />
+          </Switch>
           <Switch>
             <Route exact path="/@:id" component={userPage} />
+          </Switch>
+          <Switch>
+            <Route exact path="/create" component={CreatePost} />
           </Switch>
 
         </HashRouter>
         <AccountSystem />
+        <NotificationContainer/>
       </header>
     </div>
   );
