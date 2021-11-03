@@ -108,10 +108,14 @@ export function CreatePost() {
     }, [editorState])
     
     const handleCreatePost = useCallback(async () => {
+        const authInfo = JSON.parse(window.localStorage.getItem('login.auth') || '{}' as string)
         try {
             await ClientInstance.client.createDocument({
                 title: title,
-                body: markdownString
+                body: markdownString,
+                debug_metadata: {
+                    auth_id: authInfo.authId
+                }
             })
             NotificationManager.success('Posting succesful! Go to your posts')
         } catch {
