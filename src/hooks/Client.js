@@ -29,7 +29,7 @@ export function GetUserDocs(userDid) {
     useEffect(() => {
         ;(async () => {
             if(userDid) {
-                const output = await ClientInstance.client.getDocumentsForUser(userDid, 1, 5)
+                const output = await ClientInstance.client.getDocumentsForUser(userDid, 1, 100)
                 setPosts(output);
             }
         })();
