@@ -5,7 +5,7 @@ import { useContext, createContext } from 'react'
 class CeramicContextClass { 
     
     constructor() {
-        this.Ceramic = new CeramicClient('https://d12-b-ceramic.3boxlabs.com/');
+        this.Ceramic = new CeramicClient('https://ceramic.3speak.tv/');
     }
 
 }
