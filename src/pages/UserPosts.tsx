@@ -10,31 +10,8 @@ import Avatar from '@mui/material/Avatar';
 
 import { GetUserDocs } from "../hooks/Client";
 import { ResolveUsername } from "../hooks/Hive";
+import { PostRow } from '../components/PostRow';
 
-function PostRow(props: any) {
-
-    if (!props.title || props.title === '') {
-        return null;
-    }
-
-    return (<ListItem alignItems="flex-start">
-        <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-            primary={props.title.substring(0, 25)}
-            secondary={
-                <>
-                    <Divider />
-                    <ReactMarkdown >
-                        {props.body}
-                    </ReactMarkdown>
-                </>
-            }
-        />
-    </ListItem>)
-
-}
 
 export function UserPosts(props: any) {
     const userParam = props.match.params.id;

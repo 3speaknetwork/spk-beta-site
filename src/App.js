@@ -19,13 +19,14 @@ import {
 import { userPage } from './pages/UserPage';
 import { CreatePost } from './pages/CreatePost';
 import { UserPosts } from './pages/UserPosts';
+import { FeedsPage } from './pages/FeedsPage';
 
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 
 import 'react-notifications/lib/notifications.css';
 
-import {NotificationContainer} from 'react-notifications';
+import { NotificationContainer } from 'react-notifications';
 
 function App() {
   const {
@@ -67,19 +68,23 @@ function App() {
             }
           </div>
           <Divider />
-          <Switch>
-            <Route exact path="/@:id/posts" component={UserPosts} />
-          </Switch>
-          <Switch>
-            <Route exact path="/@:id" component={userPage} />
-          </Switch>
-          <Switch>
-            <Route exact path="/create" component={CreatePost} />
-          </Switch>
-
+          <div style={{ maxWidth: '600px', width: '70%', marginTop: '16px', display: 'flex', justifyContent: 'center' }}>
+            <Switch>
+              <Route exact path="/@:id/posts" component={UserPosts} />
+            </Switch>
+            <Switch>
+              <Route exact path="/@:id" component={userPage} />
+            </Switch>
+            <Switch>
+              <Route exact path="/create" component={CreatePost} />
+            </Switch>
+            <Switch>
+              <Route exact path="/feed" component={FeedsPage} />
+            </Switch>
+          </div>
         </HashRouter>
         <AccountSystem />
-        <NotificationContainer/>
+        <NotificationContainer />
       </header>
     </div>
   );

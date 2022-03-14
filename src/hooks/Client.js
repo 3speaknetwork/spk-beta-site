@@ -1,5 +1,5 @@
 import { useContext, createContext, useEffect, useState, useCallback } from 'react'
-import { SpkClient } from 'spk-graph-client'
+import { SpkClient } from '@spknetwork/graph-client'
 import {CeramicInstance} from './Ceramic'
 
 
@@ -54,6 +54,21 @@ export function GetChildDocs(streamId) {
     }
 }
 
+export function GetFeedPosts() {
+    const [posts, setPosts] = useState()
+    console.log(ClientInstance.client)
+    useEffect(() => {
+        ;(async () => {
+            const output = await ClientInstance.client.getFeedDocs()
+            setPosts(output);
+        })();
+    }, [])
+    
+    return {
+        posts
+    }
+
+}
 export function UserActions() {
 
     const postContent = useCallback(() => {
