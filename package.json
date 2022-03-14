@@ -10,7 +10,7 @@
     "@hiveio/dhive": "^1.1.1",
     "@mui/material": "^5.0.6",
     "@mui/styled-engine": "^5.0.2",
-    "@spknetwork/graph-client": "^1.1.0",
+    "@spknetwork/graph-client": "^1.1.1",
     "@stablelib/sha256": "^1.0.1",
     "@uiw/react-md-editor": "^3.6.5",
     "cra-template": "1.1.2",
