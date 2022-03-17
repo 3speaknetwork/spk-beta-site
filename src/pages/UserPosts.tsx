@@ -23,9 +23,9 @@ export function UserPosts(props: any) {
 
     return <div style={{ maxWidth: '600px', width: '70%', marginTop: '16px', display: 'flex', justifyContent: 'center' }}>
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', color: 'black' }}>
-            {posts.filter(e => !!e.content.title).map((e, index, array) =>
+            {posts.filter(e => !!e.title).map((e, index, array) =>
                 <>
-                    <PostRow title={e.content.title || ''} body={e.content.body || ''} />
+                    <PostRow title={e.content.title || ''} body={e.body || ''} />
                     {index !== array.length - 1 ? <Divider /> : null}
                 </>
             )}

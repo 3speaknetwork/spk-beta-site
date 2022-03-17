@@ -1,13 +1,14 @@
 import { useContext, createContext, useEffect, useState, useCallback } from 'react'
 import { SpkClient } from '@spknetwork/graph-client'
+import Axios from 'axios'
 import {CeramicInstance} from './Ceramic'
 
-
+export const API_NODE = 'https://us-01.infra.3speak.tv'
 
 class ClientContextClass { 
     
     constructor() {
-        this.client = new SpkClient('https://us-01.infra.3speak.tv', CeramicInstance.Ceramic)
+        this.client = new SpkClient(API_NODE, CeramicInstance.Ceramic)
     }
 
 }
@@ -28,9 +29,45 @@ export function GetUserDocs(userDid) {
     const [posts, setPosts] = useState([])
     useEffect(() => {
         ;(async () => {
-            if(userDid) {
+            /*if(userDid) {
                 const output = await ClientInstance.client.getDocumentsForUser(userDid, 1, 100)
                 setPosts(output);
+            }*/
+            if(userDid) {
+                const {data} = await Axios.post(`${API_NODE}/v1/graphql`, {
+                    query: `
+                    {
+                        publicFeed(parent_id:null, creator_id:"${userDid}") {
+                          stream_id
+                          parent_id
+                          body
+                          
+                          author {
+                            did
+                            description
+                          }
+                          children {
+                            stream_id
+                            version_id
+                            parent_id
+                            title
+                            body
+                            category
+                            lang
+                            type
+                            app
+                            json_metadata
+                            app_metadata
+                            community_ref
+                            author {
+                              did
+                            }
+                          }
+                        }
+                      }
+                    `
+                })
+                setPosts(data.data.publicFeed)
             }
         })();
     }, [userDid])
