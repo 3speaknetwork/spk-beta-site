@@ -7,9 +7,9 @@ export function FeedsPage() {
     const { posts } = GetFeedPosts()
     console.log(posts)
     return (<List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', color: 'black' }}>
-            {(posts || []).filter((e: any) => !!e.content.title).map((e: any, index: number, array: any[]) =>
+            {(posts || []).map((e: any, index: number, array: any[]) =>
                 <>
-                    <PostRow title={e.content.title || ''} body={e.content.body || ''} author={e.creator_id}/>
+                    <PostRow title={e.title || ''} body={e.body || ''} author={e.creator_id}/>
                     {index !== array.length - 1 ? <Divider /> : null}
                 </>
             )}

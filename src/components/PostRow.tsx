@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 export function PostRow(props: any) {
 
     if (!props.title || props.title === '') {
-        return null;
+        //return null;
     }
 
     return (<ListItem alignItems="flex-start">
