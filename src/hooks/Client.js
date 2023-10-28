@@ -3,7 +3,7 @@ import { SpkClient } from '@spknetwork/graph-client'
 import Axios from 'axios'
 import {CeramicInstance} from './Ceramic'
 
-export const API_NODE = 'https://us-01.infra.3speak.tv'
+export const API_NODE = 'https://offchain.us-02.infra.3speak.tv'
 
 class ClientContextClass { 
     

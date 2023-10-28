@@ -115,8 +115,8 @@ export function CreatePost() {
                 body: markdownString,
                 debug_metadata: {
                     auth_id: authInfo.authId
-                }
-            })
+                },
+            }, 'k2t6wyfsu4pg0bl4ne8z9dqgx8keriewo18ueao7ivfisvustydpnq200qeav6')
             NotificationManager.success('Posting succesful! Go to your posts')
         } catch {
             NotificationManager.error('Posting failed!')
